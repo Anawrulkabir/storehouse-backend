@@ -9,12 +9,12 @@
   "routes": [
     {
       "src": "/all/(.*)",
-      "dest": "/index",
+      "dest": "/",
       "methods": ["GET", "POST", "PATCH", "DELETE", "OPTIONS"]
     },
     {
       "src": "/(.*)",
-      "dest": "/index",
+      "dest": "/",
       "methods": ["GET", "POST", "PATCH", "DELETE", "OPTIONS"]
     }
   ]
