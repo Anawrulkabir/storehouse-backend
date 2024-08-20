@@ -37,6 +37,7 @@ async function run() {
   try {
     const db = client.db('storehouse')
     const allProductsCollection = db.collection('all-new-products')
+    const usersCollection = db.collection('users')
 
     // 1. Get all the products
     app.get('/all', async (req, res) => {
@@ -111,6 +112,12 @@ async function run() {
         .toArray()
       res.send(result)
       console.log(result.length)
+    })
+
+    app.post('/user', async (req, res) => {
+      const user = req.body
+      const result = await usersCollection.insertOne(user)
+      res.status(201).send(result)
     })
 
     // 2. Get all the apparel-accessories
