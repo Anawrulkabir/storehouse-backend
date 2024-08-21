@@ -44,6 +44,11 @@ async function run() {
       const query = {}
       const sort = {}
 
+      // Pagination parameters
+      const page = parseInt(req.query.page) || 1
+      const itemsPerPage = parseInt(req.query.itemsPerPage) || 9
+      const skip = (page - 1) * itemsPerPage
+
       // Filter by categoryname
 
       if (req.query.categoryName) {
@@ -105,13 +110,21 @@ async function run() {
       } else if (req.query.sortBy === 'priceHighToLow') {
         sort.price = -1 // Descending order
       }
-
-      const result = await await allProductsCollection
+      // Fetch the products with pagination
+      const totalProducts = await allProductsCollection.countDocuments(query)
+      const products = await await allProductsCollection
         .find(query)
         .sort(sort)
+        .skip(skip)
+        .limit(itemsPerPage)
         .toArray()
-      res.send(result)
-      console.log(result.length)
+      // Return products along with pagination info
+      res.send({
+        products,
+        totalProducts,
+        currentPage: page,
+        totalPages: Math.ceil(totalProducts / itemsPerPage),
+      })
     })
 
     app.post('/user', async (req, res) => {
