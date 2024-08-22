@@ -8,6 +8,7 @@ const corsOptions = {
     'http://localhost:5173',
     'http://localhost:5174',
     'https://storehouse-frontend.vercel.app',
+    'https://storehouse-fdf65.web.app',
   ],
   credentials: true,
   optionSuccessStatus: 200,
