@@ -9,6 +9,7 @@ const corsOptions = {
     'http://localhost:5174',
     'https://storehouse-frontend.vercel.app',
     'https://storehouse-fdf65.web.app',
+    'https://lively-daifuku-0d7eca.netlify.app',
   ],
   credentials: true,
   optionSuccessStatus: 200,
