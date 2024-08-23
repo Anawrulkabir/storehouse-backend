@@ -2,7 +2,6 @@ const express = require('express')
 require('dotenv').config()
 const cors = require('cors')
 const { MongoClient, ServerApiVersion } = require('mongodb')
-const productsRoute = require('./routes/productsRoute')
 
 const corsOptions = {
   origin: [
@@ -114,7 +113,7 @@ async function run() {
       }
       // Fetch the products with pagination
       const totalProducts = await allProductsCollection.countDocuments(query)
-      const products = await await allProductsCollection
+      const products = await allProductsCollection
         .find(query)
         .sort(sort)
         .skip(skip)
