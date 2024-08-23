@@ -2,6 +2,7 @@ const express = require('express')
 require('dotenv').config()
 const cors = require('cors')
 const { MongoClient, ServerApiVersion } = require('mongodb')
+const productsRoute = require('./routes/productsRoute')
 
 const corsOptions = {
   origin: [
@@ -52,7 +53,6 @@ async function run() {
       const skip = (page - 1) * itemsPerPage
 
       // Filter by categoryname
-
       if (req.query.categoryName) {
         query.categoryName = new RegExp(req.query.categoryName, 'i')
       }
@@ -101,8 +101,8 @@ async function run() {
         const searchRegex = new RegExp(req.query.search, 'i')
         query.$or = [
           { brandName: searchRegex },
-          { categoryName: searchRegex },
-          { subcategoryName: searchRegex },
+          // { categoryName: searchRegex },
+          // { subcategoryName: searchRegex },
         ]
       }
 
@@ -162,9 +162,9 @@ async function run() {
 }
 run().catch(console.dir)
 
-app.get('/', (req, res) => {
-  res.send('Server is running at http://localhost:3000')
-})
+// app.get('/', (req, res) => {
+//   res.send('Server is running at http://localhost:3000')
+// })
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)
